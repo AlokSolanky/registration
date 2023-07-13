@@ -9,4 +9,5 @@ frm.addEventListener('submit',(e)=>
 
     localStorage.setItem(mail,passwd);
     alert("data submitted successfully");
+    console.log("also new repositery is created here by alok date : 14 july 23");
 })
