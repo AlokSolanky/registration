@@ -2,8 +2,8 @@ const frm = document.getElementById('form');
 class User{
     constructor(name,mail,phone)
     {
+        this.mail = mail;
         this.name = name;
-        this.mail =mail;
         this.phone = phone;
     }
 
@@ -24,20 +24,50 @@ frm.addEventListener('submit',(e)=>
 
     const user = new User(name,mail,phone);
     
-    localStorage.setItem(mail, user.converToString());
-    alert("data submitted successfully");
-    let formtedObj = JSON.parse(localStorage.getItem(mail));
-    console.log(`email is ${formtedObj.mail} and password is ${formtedObj.password}`);
-
     
+    // alert("data submitted successfully");
+    
+    
+    if(localStorage.getItem(mail)===null)
+    {
+
+    localStorage.setItem(mail, user.converToString());
+    let formtedObj = JSON.parse(localStorage.getItem(mail));
+
     let newLi = document.createElement('li');
     newLi.setAttribute('class','list-group-item');
-    let textNode = document.createTextNode(`Name is ${name} Email is ${mail} phone number is ${phone}`);
+    let nameTextNode = document.createTextNode(formtedObj.name+"  ");
+    let mailTextNode = document.createTextNode(formtedObj.mail+"  ")
+    let phoneTextNode = document.createTextNode(formtedObj.phone);
 
-    newLi.appendChild(textNode);
+    newLi.appendChild(mailTextNode);
+    newLi.appendChild(nameTextNode);
+    newLi.appendChild(phoneTextNode);
+
+    let del_btn = document.createElement('button');
+    del_btn.setAttribute("class","btn btn-sm btn-danger delete");
+    del_btn.textContent = "X";
+
+    newLi.appendChild(del_btn)
+   
 
     const cont = document.querySelector('.li_container');
     cont.appendChild(newLi);
+    }
+    else{
+        alert("User already registered");
+    }
 })
 
+let del_btn_space = document.querySelector('.li_container');
+del_btn_space.addEventListener('click',(e)=>
+{
+    if(e.target.classList.contains('delete'))
+    {
+        let searchMail = e.target.parentElement.firstChild.textContent;
+        localStorage.removeItem(searchMail.trim());
+        del_btn_space.removeChild(e.target.parentElement);
+        
+    }
+})
 
