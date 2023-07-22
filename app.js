@@ -1,10 +1,10 @@
 // selecting form to submit
 const frm = document.getElementById("form");
 class User {
-  constructor(name, mail, phone) {
-    this.mail = mail;
-    this.name = name;
-    this.phone = phone;
+  constructor(amount, description, type) {
+    this.amount = amount;
+    this.description = description;
+    this.type = type;
   }
 
 //   to convert the user object into string 
@@ -18,33 +18,33 @@ frm.addEventListener("submit", (e) => {
   e.preventDefault();
 
 //   fetching the details of form if submitted 
-  let name = document.getElementById("name").value;
-  let mail = document.getElementById("mail").value;
-  let phone = document.getElementById("phone").value;
+  let amount = document.getElementById("amount").value;
+  let description = document.getElementById("description").value;
+  let type = document.getElementById("type").value;
 
 //   making a new user out of this data 
-  const user = new User(name, mail, phone);
+  const user = new User(amount, description, type);
 
 // checking if the mail is already registered or not 
-  if (localStorage.getItem(mail) === null) {
+  if (localStorage.getItem(description) === null) {
 
     // if there is no such mail then create that mail in local storage 
-    localStorage.setItem(mail, user.converToString());
-    let formtedObj = JSON.parse(localStorage.getItem(mail));
+    localStorage.setItem(description, user.converToString());
+    let formtedObj = JSON.parse(localStorage.getItem(description));
 
     // creating a new list to display the submitted data 
     let newLi = document.createElement("li");
     newLi.setAttribute("class", "list-group-item");
 
     // creating 3 text nodes to store name mail and phone 
-    let nameTextNode = document.createTextNode(formtedObj.name + "  ");
-    let mailTextNode = document.createTextNode(formtedObj.mail + "  ");
-    let phoneTextNode = document.createTextNode(formtedObj.phone);
+    let amountTextNode = document.createTextNode(formtedObj.amount + "  ");
+    let descriptionTextNode = document.createTextNode(formtedObj.description + "  ");
+    let typeTextNode = document.createTextNode(formtedObj.type);
 
     // appending them into list 
-    newLi.appendChild(mailTextNode);
-    newLi.appendChild(nameTextNode);
-    newLi.appendChild(phoneTextNode);
+    newLi.appendChild(descriptionTextNode);
+    newLi.appendChild(amountTextNode);
+    newLi.appendChild(typeTextNode);
 
     // creating edit button to edit the data 
 
@@ -66,7 +66,7 @@ frm.addEventListener("submit", (e) => {
     cont.appendChild(newLi);
   } else {
     // if there is already a user registered with that mail then alert 
-    alert("User already registered");
+    alert("Expense already Present");
   }
 });
 
@@ -78,24 +78,24 @@ del_btn_space.addEventListener("click", (e) => {
 
     // if clicked on delete button inside that li container
     // then search that mail in local storage and remove it from there and from li container 
-    let searchMail = e.target.parentElement.firstChild.textContent;
-    localStorage.removeItem(searchMail.trim());
+    let searchDescription = e.target.parentElement.firstChild.textContent;
+    localStorage.removeItem(searchDescription.trim());
     del_btn_space.removeChild(e.target.parentElement);
   }
   else if (e.target.classList.contains("edit")) {
 
     // if clicked on edit button inside that li container 
     // also search mail in local storage and if present then delete it from there 
-    let searchMail = e.target.parentElement.firstChild.textContent;
-    searchMail = searchMail.trim();
-    let obj = JSON.parse(localStorage.getItem(searchMail));
-    localStorage.removeItem(searchMail);
+    let searchDescription = e.target.parentElement.firstChild.textContent;
+    searchDescription = searchDescription.trim();
+    let obj = JSON.parse(localStorage.getItem(searchDescription));
+    localStorage.removeItem(searchDescription);
     del_btn_space.removeChild(e.target.parentElement);
 
     // also set the value in form to let the user edit his data 
-    document.getElementById("name").value = obj.name;
-    document.getElementById("mail").value = obj.mail;
-    document.getElementById("phone").value = obj.phone;
+    document.getElementById("amount").value = obj.amount;
+    document.getElementById("description").value = obj.description;
+    document.getElementById("type").value = obj.type;
 
   }
 });
