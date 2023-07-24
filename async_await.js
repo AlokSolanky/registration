@@ -20,31 +20,36 @@ const Movie = async ()=>
         res('coldDrink');
     })
 
-    let ticket = await getTicket;
-    console.log(`husband: now we should go in as we have ${ticket}`)
-    console.log('wife: no i am hungry');
-    console.log('husband: ok let me get popcorn');
+    // let ticket = await getTicket;
+    // console.log(`husband: now we should go in as we have ${ticket}`)
+    // console.log('wife: no i am hungry');
+    // console.log('husband: ok let me get popcorn');
 
-    let popcorn = await getPopcorn;
+    // let popcorn = await getPopcorn;
 
-    console.log(`husband: here are ${popcorn}`);
-    console.log('husband: now we should go in');
-    console.log('wife: where is butter');
-    console.log("huband:ok let me get butter");
+    // console.log(`husband: here are ${popcorn}`);
+    // console.log('husband: now we should go in');
+    // console.log('wife: where is butter');
+    // console.log("huband:ok let me get butter");
 
-    let butter = await getButter;
+    // let butter = await getButter;
     
-    console.log(`husband: here is ${butter}`);
-    console.log("husband: now we should go in");
-    console.log("wife: i need cold drink too");
-    console.log("huband: ok let me get cold drink");
+    // console.log(`husband: here is ${butter}`);
+    // console.log("husband: now we should go in");
+    // console.log("wife: i need cold drink too");
+    // console.log("huband: ok let me get cold drink");
 
-    let coldDrink = await getColdDrink;
+    // let coldDrink = await getColdDrink;
 
-    console.log(`husband: here is ${coldDrink}`);
-    console.log("husband: now we should go in");
-    console.log("wife: i am telling this for so long");
-    console.log("huband: sorry darling my bad");
+    // console.log(`husband: here is ${coldDrink}`);
+    // console.log("husband: now we should go in");
+    // console.log("wife: i am telling this for so long");
+    // console.log("huband: sorry darling my bad");
+
+    //Promise.all will wait untill all the promises are not fulfilled.
+
+    let [ticket,popcorn,butter,colddrink] = await Promise.all([getTicket,getPopcorn,getButter,getColdDrink]);
+    console.log(`got ${popcorn} got ${butter} got ${colddrink}`);
 
     return ticket;
 
