@@ -1,0 +1,22 @@
+.li_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.product_type
+{
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    flex-direction: row;  
+    width: 100%; 
+}
+h4{
+    text-align: center;
+}
+
+h2{
+    color: #198754
+}
